@@ -63,14 +63,7 @@ function mathOperation(value1, operator, value2) {
             console.log('division');
             return value1 / value2;
     }
-    
-    
-}
-
-
-
-
-
+} // end mathOperation function
 
 
 
