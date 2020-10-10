@@ -18,7 +18,6 @@ let calculationsArray = [];
 app.post('/operation', (req, res) => {
     // req.body is data that comes from client.js
     console.log('hello from post request', req.body);
-    calculationsArray.push(req.body);
     console.log('calculationsArray', calculationsArray);
     let newValue = req.body;
     console.log('newValue', newValue);
@@ -26,9 +25,14 @@ app.post('/operation', (req, res) => {
     console.log('newValue.operator', newValue.operator);
     console.log('newValue.value2', newValue.value2);
     console.log('newValue', newValue);
-    
     let result = mathOperation(Number(newValue.value1), newValue.operator, Number(newValue.value2));
+    newValue.result = result;
+
     console.log('result', result);
+    console.log('new object', newValue);
+    calculationsArray.push(newValue);
+    console.log('updated array', calculationsArray);
+    
     
     res.sendStatus(200);
 })
