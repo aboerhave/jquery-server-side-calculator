@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, Helvetica, sans-serif
+}
+
 #equalsBtn {
     background-color: lightgreen;
     font-size: 24px;

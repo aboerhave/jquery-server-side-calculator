@@ -13,6 +13,7 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 let calculationsArray = [];
+let buttonCalculationsArray = [];
 
 // get data coming from the client.js file
 app.post('/operation', (req, res) => {
@@ -65,7 +66,43 @@ function mathOperation(value1, operator, value2) {
     }
 } // end mathOperation function
 
+// POST for expresions from calculator with interface
+app.post('/buttonCalculation', (req, res) => {
+    console.log('hello from /submitCalculation post', req.body);
+    // here I want to pull apart the req.body object and get the values
+    // and operator separated
+    let expressionObject = req.body.outputLine;
+    let arrayOfExpression = expressionObject.split(' ');
+    console.log('arrayOfExpression', arrayOfExpression);
+    let value1 = Number(arrayOfExpression[0]);
+    let operator = arrayOfExpression[1];
+    let value2 = Number(arrayOfExpression[2]);
+    let result = buttonMathOperation(value1, operator, value2);
+    arrayOfExpression.push(result);
+    console.log('arrayOfExpression after calculation', arrayOfExpression);
+    buttonCalculationsArray.push(arrayOfExpression);    
+    res.sendStatus(200);    
+})
 
+// this one is just different because it still has operators as X and ÷
+function buttonMathOperation(value1, operator, value2) {
+    console.log(value1, operator, value2);
+    
+    switch(operator) {
+        case "+":
+            console.log('addition');
+            return value1 + value2;            
+        case '-':
+            console.log('subtraction');
+            return value1 - value2;
+        case 'X':
+            console.log('multiplication');
+            return value1 * value2;
+        case '÷':
+            console.log('division');
+            return value1 / value2;
+    }
+} // end mathOperation function
 
 
 // start up server

@@ -130,15 +130,24 @@ function backspaceFunction() {
 function calculateEquation() {
     console.log('equals button clicked');
     // need to put the POST stuff here
-    
-    console.log('');
-    let position1 = outputLine.substr(0, outputLine.indexOf(" "));
-    console.log('position1', position1);
-    
+    // I am sending the string with numbers and operators
+    // to the server
+    $.ajax({
+        method: 'POST',
+        url: '/buttonCalculation',
+        data: {outputLine}
+    }).then(function(response) {
+        console.log('response', response);
+        
+    }).catch(function(error){
+        alert(error);
+    });
 
 }
 
 function buttonCalcClear() {
     console.log('clear button clicked');
+    outputLine = "";
     $('#displayOutput').empty();
+    $('#displayOutput').append(outputLine);
 }
