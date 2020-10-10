@@ -8,4 +8,4 @@ Server Side Calculator
 [x] math operation on server
 [x] post request to post calculation requested in the boxes
 [x] get request to get calculation from server to client
-[] keep history of previous calculations on DOM
+[x] keep history of previous calculations on DOM

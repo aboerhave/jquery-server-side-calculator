@@ -13,10 +13,23 @@ function onReady() {
 
 // this function should take the desired equation from the DOM
 function submitOperation() {
-    let value1 = $('#firstValue').val();
+    let value1 = $('#firstValue').val().trim();
     let operator = $('input:radio[name=operator]:checked').val();
-    let value2 = $('#secondValue').val();
+    let value2 = $('#secondValue').val().trim();
     console.log('inputs', value1, operator, value2);
+
+    if (value1 == '' || value2 == '') {
+        alert('Please enter values in all of the boxes');
+        return;
+    }
+    if (operator == undefined) {
+        alert('Please select an operator to use');
+        return;
+    }
+    if (operator == '/' && value2 == '0') {
+        alert('Can\'t divide by zero!');
+        return;
+    }
     
     $.ajax({
         method: 'POST',
