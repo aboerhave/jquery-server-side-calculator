@@ -49,11 +49,28 @@ function getCalculations() {
         url: '/previousResults'
     }).then(function (response) {
         console.log('response', response);
-        
+        printCalcsToDom(response);
     });
 }
 
+
 // function to print previous calculations to DOM
+function printCalcsToDom(dataToAppend) {
+    console.log('printCalcsToDom');
+    
+    // want to empty and start over
+    $('#outputSection').empty();
+    for (calculation of dataToAppend) {
+        $('#outputSection').append(`
+            <li>    
+                <p>
+                    ${calculation.value1} ${calculation.operator} ${calculation.value2} = ${calculation.result}
+                <p>
+            </li>    
+        `);
+    }
+}
+
 
 // clears all the inputs when the C button clicked
 function clearFunction() {

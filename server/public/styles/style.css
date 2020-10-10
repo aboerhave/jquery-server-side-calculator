@@ -1,0 +1,27 @@
+#equalsBtn {
+    background-color: lightgreen;
+    font-size: 24px;
+    width: 45px;
+    margin: 3px;
+}
+
+#clearBtn {
+    background-color: #ff9999;
+    font-size: 24px;
+    width: 45px;
+    margin: 3px;
+}
+
+#inputSection {
+    font-size: 24px;
+}
+
+button:hover {
+    color: white;
+} 
+
+button:active {
+    position: relative;
+    left: 4px;
+    top: 4px;
+} 
