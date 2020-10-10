@@ -6,7 +6,11 @@ $(document).ready(onReady);
 function onReady() {
     $('#equalsBtn').on('click', submitOperation);
     $('#clearBtn').on('click', clearFunction);
-
+    $('.numberBtn').on('click', concatenateNumber);
+    $('.operatorBtn').on('click', concatenateOperator);
+    $('#clearButton2').on('click', buttonCalcClear);
+    $('#submitBtn').on('click', calculateEquation);
+    
     // get the previous calculations to put on the screen.
     getCalculations();
 }
@@ -95,3 +99,23 @@ function clearFunction() {
 
 
 ////////////TRYING TO DO STRETCH BUTTON CALCULATOR///////////////////////
+
+function concatenateNumber() {
+    console.log('a number button has been clicked');
+    $('#displayOutput').append($(this).data('value'));
+}
+
+function concatenateOperator() {
+    console.log('an operator has been clicked');
+    
+}
+
+function buttonCalcClear() {
+    console.log('clear button clicked');
+    
+}
+
+function calculateEquation() {
+    console.log('equals button clicked');
+    
+}
