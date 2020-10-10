@@ -20,7 +20,7 @@ app.post('/operation', (req, res) => {
     console.log('hello from post request', req.body);
     calculationsArray.push(req.body);
     console.log('calculationsArray', calculationsArray);
-    
+    res.sendStatus(200);
 })
 
 
