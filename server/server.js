@@ -37,6 +37,15 @@ app.post('/operation', (req, res) => {
     res.sendStatus(200);
 })
 
+// need get request so client.js can GET data of previous calculations from
+// the server
+app.get('/previousResults', (req, res) => {
+    console.log('operations get request');
+    res.send(calculationsArray);
+    
+});
+
+
 function mathOperation(value1, operator, value2) {
     console.log(value1, operator, value2);
     
