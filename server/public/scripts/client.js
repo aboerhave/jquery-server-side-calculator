@@ -10,9 +10,9 @@ function onReady() {
 
 // this function should take the desired equation from the DOM
 function submitOperation() {
-    let value1 = Number($('#firstValue').val());
+    let value1 = $('#firstValue').val();
     let operator = $('input:radio[name=operator]:checked').val();
-    let value2 = Number($('#secondValue').val());
+    let value2 = $('#secondValue').val();
     console.log('inputs', value1, operator, value2);
     
     $.ajax({
@@ -26,6 +26,7 @@ function submitOperation() {
     }).then(function(response) {
         // response that comes from the server
         console.log('response', response);
+        // clear inputs
         $('#firstValue').val('');
         $('.sign').prop('checked', false);
         $('#secondValue').val('');
@@ -36,6 +37,7 @@ function submitOperation() {
     });
 }
 
+// clears all the inputs when the C button clicked
 function clearFunction() {
     console.log('clear clicked');
     $('#firstValue').val('');
