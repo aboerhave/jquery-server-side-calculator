@@ -12,12 +12,14 @@ app.use(express.static('server/public'));
 
 app.use(bodyParser.urlencoded({extended: true}));
 
-
+let calculationsArray = [];
 
 // get data coming from the client.js file
 app.post('/operation', (req, res) => {
     // req.body is data that comes from client.js
     console.log('hello from post request', req.body);
+    calculationsArray.push(req.body);
+    console.log('calculationsArray', calculationsArray);
     
 })
 
