@@ -107,15 +107,18 @@ function concatenateNumber() {
 
 function concatenateOperator() {
     console.log('an operator has been clicked');
-    
+    let op = $(this).data('value')
+    $('#displayOutput').append(` ${op} `);
+}
+
+
+
+function calculateEquation() {
+    console.log('equals button clicked');
+    // need to put the POST stuff here
 }
 
 function buttonCalcClear() {
     console.log('clear button clicked');
-    
-}
-
-function calculateEquation() {
-    console.log('equals button clicked');
-    
+    $('#displayOutput').empty();
 }
