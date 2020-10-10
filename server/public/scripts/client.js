@@ -3,6 +3,8 @@
 
 $(document).ready(onReady);
 
+let outputLine = '';
+
 function onReady() {
     $('#equalsBtn').on('click', submitOperation);
     $('#clearBtn').on('click', clearFunction);
@@ -10,6 +12,7 @@ function onReady() {
     $('.operatorBtn').on('click', concatenateOperator);
     $('#clearButton2').on('click', buttonCalcClear);
     $('#submitBtn').on('click', calculateEquation);
+    $('#backspaceBtn').on('click', backspaceFunction);
     
     // get the previous calculations to put on the screen.
     getCalculations();
@@ -102,20 +105,34 @@ function clearFunction() {
 
 function concatenateNumber() {
     console.log('a number button has been clicked');
-    $('#displayOutput').append($(this).data('value'));
+    outputLine += $(this).data('value');
+    console.log('outputLine', outputLine);
+    
+    $('#displayOutput').empty();
+    $('#displayOutput').append(outputLine);
 }
 
 function concatenateOperator() {
     console.log('an operator has been clicked');
+    $('#displayOutput').empty();
     let op = $(this).data('value')
-    $('#displayOutput').append(` ${op} `);
+    outputLine += ` ${op} `;
+    $('#displayOutput').append(outputLine);
 }
 
-
+function backspaceFunction() {
+    console.log('backspace function clicked');
+    
+}
 
 function calculateEquation() {
     console.log('equals button clicked');
     // need to put the POST stuff here
+    console.log('');
+    let position1 = outputLine.substr(0, outputLine.indexOf(" "));
+    console.log('position1', position1);
+    
+
 }
 
 function buttonCalcClear() {
