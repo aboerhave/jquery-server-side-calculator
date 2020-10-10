@@ -1,10 +1,10 @@
 Server Side Calculator
 
-[] user interface
-    [] 2 input fields for numbers
-    [] selection of math operation
-    [] submit button
-    [] C button to clear input fields
+[x] user interface
+    [x] 2 input fields for numbers
+    [x] selection of math operation
+    [x] submit button
+    [x] C button to clear input fields
 [] math operation on server
 [] post request to post calculation requested in the boxes
 [] get request to get calculation from server to client
