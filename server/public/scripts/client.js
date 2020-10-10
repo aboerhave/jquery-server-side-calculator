@@ -122,12 +122,15 @@ function concatenateOperator() {
 
 function backspaceFunction() {
     console.log('backspace function clicked');
-    
+    outputLine = outputLine.slice(0, -1);
+    $('#displayOutput').empty();
+    $('#displayOutput').append(outputLine); 
 }
 
 function calculateEquation() {
     console.log('equals button clicked');
     // need to put the POST stuff here
+    
     console.log('');
     let position1 = outputLine.substr(0, outputLine.indexOf(" "));
     console.log('position1', position1);
