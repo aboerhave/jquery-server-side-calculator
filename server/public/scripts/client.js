@@ -92,3 +92,6 @@ function clearFunction() {
     $('.sign').prop('checked', false);
     $('#secondValue').val('');
 }
+
+
+////////////TRYING TO DO STRETCH BUTTON CALCULATOR///////////////////////

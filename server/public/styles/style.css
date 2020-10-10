@@ -16,12 +16,22 @@
     font-size: 24px;
 }
 
-button:hover {
+#inputSection button:hover {
     color: white;
 } 
 
-button:active {
+#inputSection button:active {
     position: relative;
     left: 4px;
     top: 4px;
 } 
+
+#inputSectionButtons button{
+    font-size: 36px;
+    width: 50px;
+    margin: 2px;
+}
+
+#displayOutput {
+    border: 1px solid black;
+}
