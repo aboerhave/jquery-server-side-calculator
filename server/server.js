@@ -14,6 +14,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
+// get data coming from the client.js file
+app.post('/operation', (req, res) => {
+    // req.body is data that comes from client.js
+    console.log('hello from post request', req.body);
+    
+})
 
 
 
