@@ -80,7 +80,9 @@ app.post('/buttonCalculation', (req, res) => {
     let result = buttonMathOperation(value1, operator, value2);
     arrayOfExpression.push(result);
     console.log('arrayOfExpression after calculation', arrayOfExpression);
-    buttonCalculationsArray.push(arrayOfExpression);    
+    buttonCalculationsArray.push(arrayOfExpression);   
+    console.log('buttonsCalculationsArray', buttonCalculationsArray);
+     
     res.sendStatus(200);    
 })
 
@@ -104,6 +106,11 @@ function buttonMathOperation(value1, operator, value2) {
     }
 } // end mathOperation function
 
+// want to do get request to get previous calculations to client.js
+app.get('/previousButtonResults', (req, res) => {
+    console.log('button get request');
+    res.send(buttonCalculationsArray);
+})
 
 // start up server
 app.listen(PORT, () => {

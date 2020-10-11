@@ -16,6 +16,7 @@ function onReady() {
     
     // get the previous calculations to put on the screen.
     getCalculations();
+    getButtonCalculations();
 }
 
 // this function should take the desired equation from the DOM
@@ -150,4 +151,17 @@ function buttonCalcClear() {
     outputLine = "";
     $('#displayOutput').empty();
     $('#displayOutput').append(outputLine);
+}
+
+function getButtonCalculations() {
+    console.log('get request for button section');
+    $.ajax({
+        method: 'GET',
+        url: '/previousButtonResults'
+    }).then(function (response){
+        console.log('response', response);
+
+        
+    });
+    
 }
