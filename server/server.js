@@ -74,10 +74,13 @@ app.post('/buttonCalculation', (req, res) => {
     let expressionObject = req.body.outputLine;
     let arrayOfExpression = expressionObject.split(' ');
     console.log('arrayOfExpression', arrayOfExpression);
-    let value1 = Number(arrayOfExpression[0]);
-    let operator = arrayOfExpression[1];
-    let value2 = Number(arrayOfExpression[2]);
-    let result = buttonMathOperation(value1, operator, value2);
+    let arrayToExamine = arrayOfExpression.slice(0,arrayOfExpression.length);
+    console.log('arrayToExamine', arrayToExamine);
+    //let value1 = Number(arrayOfExpression[0]);
+    //let operator = arrayOfExpression[1];
+    //let value2 = Number(arrayOfExpression[2]);
+    //let result = buttonMathOperation(value1, operator, value2);
+    let result = doTheMath(arrayToExamine);
     arrayOfExpression.push(result);
     console.log('arrayOfExpression after calculation', arrayOfExpression);
     buttonCalculationsArray.push(arrayOfExpression);   
@@ -86,14 +89,96 @@ app.post('/buttonCalculation', (req, res) => {
     res.sendStatus(200);    
 })
 
+// want to take array and find first three elements to calculate
+function doTheMath(array) {
+    console.log('array in doTheMath', array);
+    let numberOfIterations = Math.floor(array.length/2);
+    let result;
+    for (let i = 0; i < numberOfIterations; i++) {
+        console.log('i', i);
+        console.log('array', array);
+        let multiplyIndex = array.indexOf('X');
+        let divideIndex = array.indexOf('÷');
+        console.log('mIndex', multiplyIndex);
+        if (multiplyIndex > -1 && divideIndex > -1) {
+            // if multiply comes before divide
+            if(multiplyIndex < divideIndex){
+                console.log('option1');
+                
+                arrayToCheck = array.splice(multiplyIndex-1, 3);
+                console.log('arrayToCheck', arrayToCheck);
+                let value1 = arrayToCheck[0];
+                let operator = arrayToCheck[1];
+                let value2 = arrayToCheck[2];
+                result = buttonMathOperation(value1, operator, value2);
+                array.splice(multiplyIndex-1,0,result);
+            }
+            else if(divideIndex < multiplyIndex) {
+                console.log('option2');
+                
+                arrayToCheck = array.splice(divideIndex-1, 3);
+                console.log('arrayToCheck', arrayToCheck);
+                let value1 = arrayToCheck[0];
+                let operator = arrayToCheck[1];
+                let value2 = arrayToCheck[2];
+                result = buttonMathOperation(value1, operator, value2);
+                array.splice(divideIndex-1,0,result);
+            }
+        }
+        else if (multiplyIndex > 0) {
+            console.log('option 3');
+            console.log('multiplyIndex', multiplyIndex);
+            arrayToCheck = array.splice(multiplyIndex-1, 3);
+            console.log('arrayToCheck', arrayToCheck);
+            let value1 = arrayToCheck[0];
+            let operator = arrayToCheck[1];
+            let value2 = arrayToCheck[2];
+            result = buttonMathOperation(value1, operator, value2);
+            console.log('result', result);
+            array.splice(multiplyIndex-1,0,result);
+            console.log('array', array);
+        }
+        else if(divideIndex > 0) {
+            console.log('option4');
+            arrayToCheck = array.splice(divideIndex-1, 3);
+            console.log('arrayToCheck', arrayToCheck);
+            let value1 = arrayToCheck[0];
+            let operator = arrayToCheck[1];
+            let value2 = arrayToCheck[2];
+            result = buttonMathOperation(value1, operator, value2);
+            console.log('result', result);
+            array.splice(divideIndex-1,0,result);
+            console.log('array', array);
+        }
+        else {
+            console.log('option5');
+            arrayToCheck = array.splice(0, 3);
+            console.log('arrayToCheck', arrayToCheck);
+            let value1 = arrayToCheck[0];
+            let operator = arrayToCheck[1];
+            let value2 = arrayToCheck[2];
+            result = buttonMathOperation(value1, operator, value2);
+            console.log('result', result);
+            array.splice(0 ,0 ,result);
+            console.log('array', array);
+        }
+    }
+    return array[0];
+}
+
+// function checkForLowestMorD(array){
+//     let multiplyIndex 
+
+// }
+
 // this one is just different because it still has operators as X and ÷
 function buttonMathOperation(value1, operator, value2) {
-    console.log(value1, operator, value2);
+    console.log("buttonMathOperation", value1, operator, value2);
     
     switch(operator) {
         case "+":
             console.log('addition');
-            return value1 + value2;            
+            return Number(value1) + Number(value2);            
         case '-':
             console.log('subtraction');
             return value1 - value2;
@@ -104,12 +189,21 @@ function buttonMathOperation(value1, operator, value2) {
             console.log('division');
             return value1 / value2;
     }
-} // end mathOperation function
+} // end buttonMathOperation function
 
 // want to do get request to get previous calculations to client.js
 app.get('/previousButtonResults', (req, res) => {
     console.log('button get request');
     res.send(buttonCalculationsArray);
+})
+
+// DELETE request
+app.delete('/delete', (req, res) => {
+    console.log('delete request');
+    buttonCalculationsArray.splice(0, buttonCalculationsArray.length);
+    console.log('buttonCalculationsArray', buttonCalculationsArray);
+    res.sendStatus(200);
+    
 })
 
 // start up server

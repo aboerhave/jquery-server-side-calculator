@@ -13,6 +13,7 @@ function onReady() {
     $('#clearButton2').on('click', buttonCalcClear);
     $('#submitBtn').on('click', calculateEquation);
     $('#backspaceBtn').on('click', backspaceFunction);
+    $('#clearEntries').on('click', clearServer);
     
     // get the previous calculations to put on the screen.
     getCalculations();
@@ -139,6 +140,9 @@ function calculateEquation() {
         data: {outputLine}
     }).then(function(response) {
         console.log('response', response);
+        getButtonCalculations();
+        $('#displayOutput').empty();
+        outputLine = '';
         
     }).catch(function(error){
         alert(error);
@@ -160,8 +164,40 @@ function getButtonCalculations() {
         url: '/previousButtonResults'
     }).then(function (response){
         console.log('response', response);
+        printButtonCalcsToDom(response);
+    });
+}
 
+function printButtonCalcsToDom(expressions) {
+    console.log('in the printing results function for calc 2');
+    $('#calcWithButtonsOutputSection').empty();
+    for(expression of expressions) {       
+        console.log('expression', expression);
         
+        $('#calcWithButtonsOutputSection').append(`
+            <li>    
+                <p class="listOutput">`);
+        for (let i = 0; i < expression.length; i++) {
+            $('.listOutput').append(`
+                ${expression[i]}    
+            `);
+        }
+        $('.listOutput').append(`</p></li>`);
+    }
+} // end of printButtonCalcsToDom function
+
+
+
+
+// want to clear server data
+function clearServer() {
+    console.log('delete request');
+    $.ajax({
+        method: 'DELETE',
+        url: '/delete'
+    }).then(function(response){
+        console.log('response', response);
+        getButtonCalculations();
     });
     
 }

@@ -12,5 +12,5 @@ Server Side Calculator
 
 updated for stretch goals section
 [] make sure fields are filled in right
-[] do a delete request to remove the history in the server
+[x] do a delete request to remove the history in the server
 [] put a previous calculation on the display by clicking on it

@@ -66,3 +66,15 @@ body {
     margin: 2px;
 }
 
+/* div border and spacing */
+#inputSectionButtons {
+    display: inline-block;
+    border: 5px solid black;
+    padding: 10px;
+}
+
+#clearEntries {
+    font-size: 20px;
+    width: 224px;
+    margin: 2px;
+}
