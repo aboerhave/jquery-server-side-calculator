@@ -177,16 +177,21 @@ function printButtonCalcsToDom(expressions) {
         $('#calcWithButtonsOutputSection').append(`
             <li>    
                 <p class="listOutput">`);
-        for (let i = 0; i < expression.length; i++) {
-            $('.listOutput').append(`
-                ${expression[i]}    
-            `);
-        }
-        $('.listOutput').append(`</p></li>`);
+                    for (let i = 0; i < expression.length; i++) {
+                        $('#calcWithButtonsOutputSection').append(` ${expression[i]}`);
+                    }           
+        $('#calcWithButtonsOutputSection').append(`
+                    </p>
+            </li>
+        `);
     }
 } // end of printButtonCalcsToDom function
 
-
+// for (let i = 0; i < expression.length; i++) {
+//     $('.listOutput').append(`
+//         ${expression[i]}    
+//     `);
+// $('.listOutput').append(`</p></li>`);
 
 
 // want to clear server data

@@ -81,6 +81,7 @@ app.post('/buttonCalculation', (req, res) => {
     //let value2 = Number(arrayOfExpression[2]);
     //let result = buttonMathOperation(value1, operator, value2);
     let result = doTheMath(arrayToExamine);
+    arrayOfExpression.push('=');
     arrayOfExpression.push(result);
     console.log('arrayOfExpression after calculation', arrayOfExpression);
     buttonCalculationsArray.push(arrayOfExpression);   

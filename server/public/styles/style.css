@@ -20,11 +20,11 @@ body {
     font-size: 24px;
 }
 
-#inputSection button:hover {
+button:hover {
     color: white;
 } 
 
-#inputSection button:active {
+button:active {
     position: relative;
     left: 4px;
     top: 4px;
@@ -71,10 +71,45 @@ body {
     display: inline-block;
     border: 5px solid black;
     padding: 10px;
+    background-color: ghostwhite;
 }
 
 #clearEntries {
     font-size: 20px;
     width: 224px;
     margin: 2px;
+    background-color: #ff9999;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    font-size: 30px;
+}
+
+#submitBtn {
+    background-color: lightgreen;   
+}
+
+#clearButton2 {
+    background-color: #ff9999;
+}
+
+#backspaceBtn {
+    background-color: #ff9999;
+}
+
+.operatorBtn {
+    background-color: lightskyblue;
+}
+
+.numberBtn {
+    background-color: honeydew;
+}
+
+.numberBtn:hover {
+    color: white ;
+    background-color: lightslategray;
 }
