@@ -1,23 +1,31 @@
-
-
+// This is the assignment for week 8 of Prime Digital Academy for Adame Boerhave.
+// It was created 10/9/2020 - 10/11/2020
 
 $(document).ready(onReady);
 
+// string to display
 let outputLine = '';
+let outputBoolean = false;  // This boolean signals whether a result was just displayed
+let operatorBoolean = true; // This boolean signals whether an operator has just been pressed
 
+// stuff to do on page load
 function onReady() {
+    // button listeners for first calculator
     $('#equalsBtn').on('click', submitOperation);
     $('#clearBtn').on('click', clearFunction);
+    // button listeners for second calculator
     $('.numberBtn').on('click', concatenateNumber);
     $('.operatorBtn').on('click', concatenateOperator);
     $('#clearButton2').on('click', buttonCalcClear);
     $('#submitBtn').on('click', calculateEquation);
     $('#backspaceBtn').on('click', backspaceFunction);
     $('#clearEntries').on('click', clearServer);
+    // listener for clicking on text results to print in display box
+    $('#calcWithButtonsOutputSection').on('click', '.listOutput', printToDisplay);
     
     // get the previous calculations to put on the screen.
-    getCalculations();
-    getButtonCalculations();
+    getCalculations();          // get function for first calculator
+    getButtonCalculations();    // get function for second calc
 }
 
 // this function should take the desired equation from the DOM
@@ -106,24 +114,36 @@ function clearFunction() {
 ////////////TRYING TO DO STRETCH BUTTON CALCULATOR///////////////////////
 
 function concatenateNumber() {
+    if (outputBoolean == true) {
+        outputLine = "";
+    }
     console.log('a number button has been clicked');
-    outputLine += $(this).data('value');
+    let stuffToAdd = $(this).data('value');
+    outputLine += `${stuffToAdd}`; 
     console.log('outputLine', outputLine);
-    
     $('#displayOutput').empty();
     $('#displayOutput').append(outputLine);
+    operatorBoolean = false;
+    outputBoolean = false;
 }
 
 function concatenateOperator() {
+    if (operatorBoolean == true) {
+        alert('please enter another number before an operator');
+        return;
+    }
     console.log('an operator has been clicked');
     $('#displayOutput').empty();
     let op = $(this).data('value')
     outputLine += ` ${op} `;
-    $('#displayOutput').append(outputLine);
+    $('#displayOutput').append(outputLine); 
+    outputBoolean = false;
+    operatorBoolean = true;
 }
 
 function backspaceFunction() {
     console.log('backspace function clicked');
+    outputLine = outputLine.toString();
     outputLine = outputLine.slice(0, -1);
     $('#displayOutput').empty();
     $('#displayOutput').append(outputLine); 
@@ -134,6 +154,10 @@ function calculateEquation() {
     // need to put the POST stuff here
     // I am sending the string with numbers and operators
     // to the server
+    if (operatorBoolean == true) {
+        alert('the equation cannot end with an operator');
+        return;
+    }
     $.ajax({
         method: 'POST',
         url: '/buttonCalculation',
@@ -142,8 +166,8 @@ function calculateEquation() {
         console.log('response', response);
         getButtonCalculations();
         $('#displayOutput').empty();
-        outputLine = '';
-        
+        $('#displayOutput').append(outputLine);
+        outputBoolean = true; 
     }).catch(function(error){
         alert(error);
     });
@@ -168,30 +192,56 @@ function getButtonCalculations() {
     });
 }
 
+// function printButtonCalcsToDom(expressions) {
+//     console.log('in the printing results function for calc 2');
+//     $('#calcWithButtonsOutputSection').empty();
+//     for(expression of expressions) {       
+//         console.log('expression', expression);
+        
+//         $('#calcWithButtonsOutputSection').append(`
+//             <li>    
+//                 <p class="listOutput">`);
+//                     for (let i = 0; i < expression.length; i++) {
+//                         $('#calcWithButtonsOutputSection').append(` ${expression[i]}`);
+//                     }           
+//         // $('#calcWithButtonsOutputSection').append(`
+//         //             </p>
+//         //     </li>
+//         // `);
+//     }
+//     if (expressions.length > 0) {
+//     outputLine = expressions[expressions.length-1].slice(-1)[0];
+//     console.log('outputLine From print function', outputLine);
+//     $('#displayOutput').empty();
+//     $('#displayOutput').append(outputLine);
+//     }
+// } // end of printButtonCalcsToDom function
+
 function printButtonCalcsToDom(expressions) {
     console.log('in the printing results function for calc 2');
     $('#calcWithButtonsOutputSection').empty();
     for(expression of expressions) {       
         console.log('expression', expression);
+        let newString = expression.join();
+        let outputString = newString.replace(/,/g, ' ')
+        console.log('outputString', outputString);
         
         $('#calcWithButtonsOutputSection').append(`
-            <li>    
-                <p class="listOutput">`);
-                    for (let i = 0; i < expression.length; i++) {
-                        $('#calcWithButtonsOutputSection').append(` ${expression[i]}`);
-                    }           
-        $('#calcWithButtonsOutputSection').append(`
-                    </p>
+            <li>
+                <p class="listOutput">
+                    ${outputString}
+                </p>
             </li>
         `);
     }
+    if (expressions.length > 0) {
+    outputLine = expressions[expressions.length-1].slice(-1)[0];
+    console.log('outputLine From print function', outputLine);
+    $('#displayOutput').empty();
+    $('#displayOutput').append(outputLine);
+    }
 } // end of printButtonCalcsToDom function
 
-// for (let i = 0; i < expression.length; i++) {
-//     $('.listOutput').append(`
-//         ${expression[i]}    
-//     `);
-// $('.listOutput').append(`</p></li>`);
 
 
 // want to clear server data
@@ -205,4 +255,16 @@ function clearServer() {
         getButtonCalculations();
     });
     
+}
+
+function printToDisplay() {
+    console.log('printToDisplay function');
+    let text = $(this).text().trim();
+    console.log('text', text);   
+    let end = text.indexOf('=');
+    let textToDisplay = text.slice(0,end-1);
+    $('#displayOutput').empty();
+    $('#displayOutput').append(textToDisplay);
+    outputLine = textToDisplay;
+    operatorBoolean = false;
 }
