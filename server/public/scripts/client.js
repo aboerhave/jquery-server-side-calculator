@@ -26,28 +26,30 @@ function onReady() {
     // get the previous calculations to put on the screen.
     getCalculations();          // get function for first calculator
     getButtonCalculations();    // get function for second calc
-}
+}   // end onReady fn
 
-// this function should take the desired equation from the DOM
+// this function takes the desired equation from the DOM and posts
+// it to the server
 function submitOperation() {
+    // values from input boxes and operator buttons
     let value1 = $('#firstValue').val().trim();
     let operator = $('input:radio[name=operator]:checked').val();
     let value2 = $('#secondValue').val().trim();
     console.log('inputs', value1, operator, value2);
-
+    // check for values in boxes
     if (value1 == '' || value2 == '') {
         alert('Please enter values in all of the boxes');
         return;
     }
-    if (operator == undefined) {
+    if (operator == undefined) {            // check for operator selected
         alert('Please select an operator to use');
         return;
     }
-    if (operator == '/' && value2 == '0') {
+    if (operator == '/' && value2 == '0') { // check for divide by 0
         alert('Can\'t divide by zero!');
         return;
     }
-    
+    // post request
     $.ajax({
         method: 'POST',
         url: '/operation',
@@ -63,12 +65,12 @@ function submitOperation() {
         $('#firstValue').val('');
         $('.sign').prop('checked', false);
         $('#secondValue').val('');
-        getCalculations();
+        getCalculations();  // call to get request
     }).catch(function(error){
         // notify if an error
         alert(error);
     });
-}
+}   // end submitOperation fn
 
 // want to use GET request to get calculations previously completed that are
 // now in the calculationsArray
@@ -79,15 +81,13 @@ function getCalculations() {
         url: '/previousResults'
     }).then(function (response) {
         console.log('response', response);
-        printCalcsToDom(response);
+        printCalcsToDom(response);  // call function to display previous calcs
     });
-}
-
+}   // end getCalculations fn
 
 // function to print previous calculations to DOM
 function printCalcsToDom(dataToAppend) {
     console.log('printCalcsToDom');
-    
     // want to empty and start over
     $('#outputSection').empty();
     for (calculation of dataToAppend) {
@@ -99,7 +99,7 @@ function printCalcsToDom(dataToAppend) {
             </li>    
         `);
     }
-}
+}   // end printCalcsToDom fn
 
 
 // clears all the inputs when the C button clicked
@@ -108,11 +108,13 @@ function clearFunction() {
     $('#firstValue').val('');
     $('.sign').prop('checked', false);
     $('#secondValue').val('');
-}
+}   // end clearFunction
 
 
-////////////TRYING TO DO STRETCH BUTTON CALCULATOR///////////////////////
+//////////////////////////////////////SECTION FOR FUNCTIONS FOR STRETCH BUTTON CALCULATOR//////////////////////////////////////////////////
 
+// This function runs on a click of a number.  If there is a previous display there, the number
+// replaces it.  It sets states of the booleans.
 function concatenateNumber() {
     if (outputBoolean == true) {
         outputLine = "";
@@ -125,8 +127,10 @@ function concatenateNumber() {
     $('#displayOutput').append(outputLine);
     operatorBoolean = false;
     outputBoolean = false;
-}
+}   // end concatenateNumber fn
 
+// This function runs on click of an operator button.  It does not let the user press the button if the last
+// thing in the display is an operator
 function concatenateOperator() {
     if (operatorBoolean == true) {
         alert('please enter another number before an operator');
@@ -139,21 +143,21 @@ function concatenateOperator() {
     $('#displayOutput').append(outputLine); 
     outputBoolean = false;
     operatorBoolean = true;
-}
+}   // end concatenateOperator fn
 
+// This function deletes a character if the left arrow button is pressed
 function backspaceFunction() {
     console.log('backspace function clicked');
     outputLine = outputLine.toString();
     outputLine = outputLine.slice(0, -1);
     $('#displayOutput').empty();
     $('#displayOutput').append(outputLine); 
-}
+}   // end backspaceFunction
 
+// This function makes the POST request with the equation that is in the display of the calculator
 function calculateEquation() {
     console.log('equals button clicked');
-    // need to put the POST stuff here
-    // I am sending the string with numbers and operators
-    // to the server
+    // I am sending the string with numbers and operators to the server
     if (operatorBoolean == true) {
         alert('the equation cannot end with an operator');
         return;
@@ -171,16 +175,17 @@ function calculateEquation() {
     }).catch(function(error){
         alert(error);
     });
+}   // end calculateEquation fn
 
-}
-
+// This function clears the display
 function buttonCalcClear() {
     console.log('clear button clicked');
     outputLine = "";
     $('#displayOutput').empty();
     $('#displayOutput').append(outputLine);
-}
+}   // end buttonCalcClear fn
 
+// This function gets an array of previous calculations from the server
 function getButtonCalculations() {
     console.log('get request for button section');
     $.ajax({
@@ -190,33 +195,9 @@ function getButtonCalculations() {
         console.log('response', response);
         printButtonCalcsToDom(response);
     });
-}
+}   // end getButtonCalculations
 
-// function printButtonCalcsToDom(expressions) {
-//     console.log('in the printing results function for calc 2');
-//     $('#calcWithButtonsOutputSection').empty();
-//     for(expression of expressions) {       
-//         console.log('expression', expression);
-        
-//         $('#calcWithButtonsOutputSection').append(`
-//             <li>    
-//                 <p class="listOutput">`);
-//                     for (let i = 0; i < expression.length; i++) {
-//                         $('#calcWithButtonsOutputSection').append(` ${expression[i]}`);
-//                     }           
-//         // $('#calcWithButtonsOutputSection').append(`
-//         //             </p>
-//         //     </li>
-//         // `);
-//     }
-//     if (expressions.length > 0) {
-//     outputLine = expressions[expressions.length-1].slice(-1)[0];
-//     console.log('outputLine From print function', outputLine);
-//     $('#displayOutput').empty();
-//     $('#displayOutput').append(outputLine);
-//     }
-// } // end of printButtonCalcsToDom function
-
+// This function takes the array from the server and prints it to the screen
 function printButtonCalcsToDom(expressions) {
     console.log('in the printing results function for calc 2');
     $('#calcWithButtonsOutputSection').empty();
@@ -242,9 +223,7 @@ function printButtonCalcsToDom(expressions) {
     }
 } // end of printButtonCalcsToDom function
 
-
-
-// want to clear server data
+// This function requests to clear the array of calculations on the server
 function clearServer() {
     console.log('delete request');
     $.ajax({
@@ -254,9 +233,10 @@ function clearServer() {
         console.log('response', response);
         getButtonCalculations();
     });
-    
-}
+}   // end clearServer fn
 
+// This function is called when one of the output lines is clicked on and it puts it back
+// in the display to recalculate, if desired
 function printToDisplay() {
     console.log('printToDisplay function');
     let text = $(this).text().trim();
@@ -267,4 +247,4 @@ function printToDisplay() {
     $('#displayOutput').append(textToDisplay);
     outputLine = textToDisplay;
     operatorBoolean = false;
-}
+}   // end printToDisplay fn
