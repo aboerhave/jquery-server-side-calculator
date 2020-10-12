@@ -1,4 +1,4 @@
-// This is the assignment for week 8 of Prime Digital Academy for Adame Boerhave.
+// This is the client.js file for the assignment for week 8 of Prime Digital Academy for Adame Boerhave.
 // It was created 10/9/2020 - 10/11/2020
 
 $(document).ready(onReady);

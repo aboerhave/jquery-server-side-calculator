@@ -1,7 +1,12 @@
+/* This is the stylesheet for the assignment for week 8 of Prime Digital Academy for Adame Boerhave.
+It was created 10/9/2020 - 10/11/2020 */
+
+/* test font for entire page */
 body {
     font-family: Arial, Helvetica, sans-serif
 }
 
+/* color and size for equals button for calc 1 */
 #equalsBtn {
     background-color: lightgreen;
     font-size: 24px;
@@ -9,6 +14,7 @@ body {
     margin: 3px;
 }
 
+/* color and size for clear button for calc 1 */
 #clearBtn {
     background-color: #ff9999;
     font-size: 24px;
@@ -16,44 +22,52 @@ body {
     margin: 3px;
 }
 
+/* font size for calc 1 */
 #inputSection {
     font-size: 24px;
 }
 
+/* changes color of text for most buttons to white */
 button:hover {
     color: white;
 } 
 
+/* moves buttons a little when clicked on */
 button:active {
     position: relative;
     left: 4px;
     top: 4px;
 } 
 
+/* button size and spacing for number buttons on calc 2 */
 #inputSectionButtons .numberBtn {
     font-size: 36px;
     width: 50px;
     margin: 2px;
 }
 
+/* button size and spacing for operator buttons on calc 2 */
 #inputSectionButtons .operatorBtn {
     font-size: 36px;
     width: 50px;
     margin: 2px;
 }
 
+/* button size and spacing for equals button on calc 2 */
 #inputSectionButtons #submitBtn {
     font-size: 36px;
     width: 50px;
     margin: 2px;
 }
 
+/* button size and spacing for C button on calc 2 */
 #inputSectionButtons #clearButton2 {
     font-size: 36px;
     width: 108px;
     margin: 2px;
 }
 
+/* style for display box on calc 2 */
 #displayOutput {
     border: 1px solid black;
     font-size: 36px;
@@ -61,13 +75,14 @@ button:active {
     background-color: white;
 }
 
+/* size and spacing of left arrow button */
 #inputSectionButtons #backspaceBtn {
     font-size: 36px;;
     width: 108px;
     margin: 2px;
 }
 
-/* div border and spacing */
+/* div border, spacing, and color to make look kind of like real calculator */
 #inputSectionButtons {
     display: inline-block;
     border: 5px solid black;
@@ -75,6 +90,7 @@ button:active {
     background-color: lightcyan;
 }
 
+/* size, spacing and color for bottom clear entries button */
 #clearEntries {
     font-size: 20px;
     width: 224px;
@@ -82,44 +98,50 @@ button:active {
     background-color: #ff9999;
 }
 
+/* takes away dot in list */
 li {
     list-style: none;
 }
 
+/* size of output lines */
 ul {
     font-size: 30px;
 }
 
+/* equals button color */
 #submitBtn {
     background-color: lightgreen;   
 }
 
+/* color for C button */
 #clearButton2 {
     background-color: #ff9999;
 }
 
+/* color for left arrow button */
 #backspaceBtn {
     background-color: #ff9999;
 }
 
+/* color for operator buttons */
 .operatorBtn {
     background-color: lightskyblue;
 }
 
+/* color for all of the buttons with numbers */
 .numberBtn {
     background-color: honeydew;
 }
 
+/* changes color of number buttons when hovered over */
 .numberBtn:hover {
     color: white ;
     background-color: lightslategray;
 }
 
-.red {
-    color: red;
-}
-
+/* makes it so the list output only goes to the edge of the numbers,
+so the whole width of the page can't be clicked onl to move the equation to
+the display inadvertently */
 .listOutput {
     display: inline;
-
 }
