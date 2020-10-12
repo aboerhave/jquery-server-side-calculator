@@ -4,7 +4,7 @@
 
 ## Description
 
-Duration: 48 hours - evening 10/2/2020 - evening 10/4/2020
+Duration: 48 hours - evening 10/9/2020 - evening 10/11/2020
 
 This project is a calculator that does the calculations on the server and sends back the calculations including the result.  There are two calculators, the first with two input boxes and buttons to select an operator and an equals button to submit the calculation.  The second is more like a real calculator with an interface with buttons to click on and a display section.  I found it easiest to leave the first there when making the second one.  In the future, I may determine how to do them in separate files.  
 
