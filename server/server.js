@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 // creates instance of express by calling the function returned above - gives us an object
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.static('server/public'));
 
