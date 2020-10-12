@@ -11,6 +11,6 @@ Server Side Calculator
 [x] keep history of previous calculations on DOM
 
 updated for stretch goals section
-[] make sure fields are filled in right
+[x] make sure fields are filled in right
 [x] do a delete request to remove the history in the server
-[] put a previous calculation on the display by clicking on it
+[x] put a previous calculation on the display by clicking on it
