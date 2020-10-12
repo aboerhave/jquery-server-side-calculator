@@ -26,7 +26,7 @@ Another challenge was determining how to complete the logic for the calculator. 
 
 ## Installation
 
-The project can be forked and cloned from the git repository and then requires going to the terminal in the folder for the project and getting express.  This can be done by typing the command npm install.  This will also add the Body-Parser, which is required to send data back and forth to the server.  Then, in a terminal command window, with the current directory as the directory of this project, the server may be started by the command "node server/server.js".  At this point, a browser window can be sent to localhost:5000 and the calculators should be able to be used.  
+The project can be forked and cloned from the git repository and then requires going to the terminal in the folder for the project and getting express.  This can be done by typing the command npm install.  This will also add Body-Parser, which is required to send data back and forth to the server.  Then, in a terminal command window, with the current directory as the directory of this project, the server may be started by the command "node server/server.js".  At this point, a browser window can be sent to localhost:5000 and the calculators should be able to be used.  
 
 ## Usage
 
